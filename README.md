@@ -8,6 +8,9 @@ This is mainly designed to validate two requirements,
 
 Additionally each cluster has its own NAT64/DNS64 VM to translate and handle any outbound traffic to IPv4 endpoints such as Github and DockerHub.
 
+At a high level this is what it looks like,
+![IPv6 clusters on AWS](https://user-images.githubusercontent.com/2648624/130150402-5fd913bb-aeff-41dd-a84f-c70b56dd8fd3.jpg)
+
 ## Prerequisites
 
 * AWS access
