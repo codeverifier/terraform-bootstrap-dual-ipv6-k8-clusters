@@ -84,17 +84,13 @@ EOF
 # Apply sysctl params without reboot
 sysctl --system
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-echo \
-  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 apt update -qy
-apt install -qy containerd.io
-apt-mark hold containerd.io
+apt install -qy containerd
+apt-mark hold containerd
 
 mkdir -p /etc/containerd
 containerd config default > /etc/containerd/config.toml
-sed -i '/^          \[plugins\."io\.containerd\.grpc\.v1\.cri"\.containerd\.runtimes\.runc\.options\]/a \            SystemdCgroup = true' /etc/containerd/config.toml
+sed -i "s/SystemdCgroup = false/SystemdCgroup = true/g" /etc/containerd/config.toml
 systemctl restart containerd
 
 # ------------------------------------------
