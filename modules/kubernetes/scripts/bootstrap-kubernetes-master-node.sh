@@ -55,6 +55,11 @@ if [[ $is_enforced != "Disabled" ]]; then
 fi
 
 # ------------------------------------------
+# To fix DNS resolution in containerd
+# ------------------------------------------
+sed -i 's/::1 ip6-localhost ip6-loopback/::1 localhost ip6-localhost ip6-loopback/' /etc/hosts
+
+# ------------------------------------------
 # Configure DNS resolver
 # ------------------------------------------
 if [[ -f /etc/systemd/resolved.conf ]]; then
